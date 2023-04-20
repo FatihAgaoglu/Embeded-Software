@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"timer interrupt\startup_stm32f100xb.o"
+"timer interrupt\main.o"
+"timer interrupt\stm32f1xx_it.o"
+"timer interrupt\stm32f1xx_hal_msp.o"
+"timer interrupt\stm32f1xx_hal_gpio_ex.o"
+"timer interrupt\stm32f1xx_hal_tim.o"
+"timer interrupt\stm32f1xx_hal_tim_ex.o"
+"timer interrupt\stm32f1xx_hal.o"
+"timer interrupt\stm32f1xx_hal_rcc.o"
+"timer interrupt\stm32f1xx_hal_rcc_ex.o"
+"timer interrupt\stm32f1xx_hal_gpio.o"
+"timer interrupt\stm32f1xx_hal_dma.o"
+"timer interrupt\stm32f1xx_hal_cortex.o"
+"timer interrupt\stm32f1xx_hal_pwr.o"
+"timer interrupt\stm32f1xx_hal_flash.o"
+"timer interrupt\stm32f1xx_hal_flash_ex.o"
+"timer interrupt\stm32f1xx_hal_exti.o"
+"timer interrupt\system_stm32f1xx.o"
+--strict --scatter "TIMER Interrupt\TIMER Interrupt.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "TIMER Interrupt.map" -o "TIMER Interrupt\TIMER Interrupt.axf"

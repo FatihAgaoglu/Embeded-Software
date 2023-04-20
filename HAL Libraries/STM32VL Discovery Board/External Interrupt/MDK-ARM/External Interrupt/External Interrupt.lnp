@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"external interrupt\startup_stm32f100xb.o"
+"external interrupt\main.o"
+"external interrupt\stm32f1xx_it.o"
+"external interrupt\stm32f1xx_hal_msp.o"
+"external interrupt\stm32f1xx_hal_gpio_ex.o"
+"external interrupt\stm32f1xx_hal_tim.o"
+"external interrupt\stm32f1xx_hal_tim_ex.o"
+"external interrupt\stm32f1xx_hal.o"
+"external interrupt\stm32f1xx_hal_rcc.o"
+"external interrupt\stm32f1xx_hal_rcc_ex.o"
+"external interrupt\stm32f1xx_hal_gpio.o"
+"external interrupt\stm32f1xx_hal_dma.o"
+"external interrupt\stm32f1xx_hal_cortex.o"
+"external interrupt\stm32f1xx_hal_pwr.o"
+"external interrupt\stm32f1xx_hal_flash.o"
+"external interrupt\stm32f1xx_hal_flash_ex.o"
+"external interrupt\stm32f1xx_hal_exti.o"
+"external interrupt\system_stm32f1xx.o"
+--strict --scatter "External Interrupt\External Interrupt.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "External Interrupt.map" -o "External Interrupt\External Interrupt.axf"

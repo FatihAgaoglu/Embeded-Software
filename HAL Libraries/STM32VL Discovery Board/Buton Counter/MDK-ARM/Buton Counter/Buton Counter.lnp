@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"buton counter\startup_stm32f100xb.o"
+"buton counter\main.o"
+"buton counter\stm32f1xx_it.o"
+"buton counter\stm32f1xx_hal_msp.o"
+"buton counter\stm32f1xx_hal_gpio_ex.o"
+"buton counter\stm32f1xx_hal_tim.o"
+"buton counter\stm32f1xx_hal_tim_ex.o"
+"buton counter\stm32f1xx_hal.o"
+"buton counter\stm32f1xx_hal_rcc.o"
+"buton counter\stm32f1xx_hal_rcc_ex.o"
+"buton counter\stm32f1xx_hal_gpio.o"
+"buton counter\stm32f1xx_hal_dma.o"
+"buton counter\stm32f1xx_hal_cortex.o"
+"buton counter\stm32f1xx_hal_pwr.o"
+"buton counter\stm32f1xx_hal_flash.o"
+"buton counter\stm32f1xx_hal_flash_ex.o"
+"buton counter\stm32f1xx_hal_exti.o"
+"buton counter\system_stm32f1xx.o"
+--strict --scatter "Buton Counter\Buton Counter.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Buton Counter.map" -o "Buton Counter\Buton Counter.axf"
