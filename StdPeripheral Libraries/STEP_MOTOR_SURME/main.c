@@ -9,17 +9,15 @@
 
 void gpioConfig(){
 	
-//	GPIO_InitTypeDef GPIOInitStructure;
+	GPIO_InitTypeDef GPIOInitStructure;
 	
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-		RCC->APB2ENR = 0X00000004;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+
+	GPIOInitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
+	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
+	GPIOInitStructure.GPIO_Speed=GPIO_Speed_50MHz;
 	
-//	GPIOInitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-//	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
-//	GPIOInitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-		GPIOB->CRL = 0X00000333;
-	
-//	GPIO_Init(GPIOA,&GPIOInitStructure);
+	GPIO_Init(GPIOA,&GPIOInitStructure);
 	
 }
 

@@ -7,62 +7,34 @@ float voltage=0;
 float mapValue=0;
 
 void gpioConfig(){
+
+	RCC ->APB2ENR = 0X0000000C;
 	
-//	GPIO_InitTypeDef GPIOInitStructure;
+	GPIOB ->CRL = 0X00000333;
+	GPIOB ->CRH = 0X00000300;
 	
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
-		RCC ->APB2ENR = 0X0000000C;
+	GPIOA ->CRL = 0X00000000;
 	
-//	GPIOInitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
-//	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_10;
-//	GPIOInitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-		GPIOB ->CRL = 0X00000333;
-		GPIOB ->CRH = 0X00000300;
-	
-//	GPIO_Init(GPIOB,&GPIOInitStructure);
-	
-//	GPIOInitStructure.GPIO_Mode=GPIO_Mode_AIN;
-//	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0;
-		GPIOA ->CRL = 0X00000000;
-	
-//	GPIO_Init(GPIOA,&GPIOInitStructure);
 	
 }
 
 void adcConfig(){
 	
-//	ADC_InitTypeDef ADCInitStructure;
-	
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,ENABLE);
-		RCC ->APB2ENR |= 0X00000200;
-	
-//	ADCInitStructure.ADC_ContinuousConvMode=ENABLE;
-//	ADCInitStructure.ADC_DataAlign=ADC_DataAlign_Right;
-//	ADCInitStructure.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None;
-//	ADCInitStructure.ADC_Mode=ADC_Mode_Independent;
-//	ADCInitStructure.ADC_NbrOfChannel=1;
-//	ADCInitStructure.ADC_ScanConvMode=DISABLE;
+	RCC ->APB2ENR |= 0X00000200;
 
-		ADC1 ->CR2 = 0X00000003;	//ADC enable
-		ADC1 ->SMPR2 = 0X00000005;	//55.5 Cycles
+	ADC1 ->CR2 = 0X00000003;	//ADC enable
+	ADC1 ->SMPR2 = 0X00000005;	//55.5 Cycles
 	
-//	ADC_Init(ADC1,&ADCInitStructure);
 	ADC_Cmd(ADC1,ENABLE);
 	
 }
 
 uint16_t readADC(){
 	
-//	ADC_RegularChannelConfig(ADC1,ADC_Channel_0,1,ADC_SampleTime_55Cycles5);
+	ADC1 ->CR2 |= 0X00400000;
 	
-//	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
-		ADC1 ->CR2 |= 0X00400000;
-	
-//	while(ADC_GetFlagStatus(ADC1,ADC_FLAG_EOC)==RESET);
 	while(!(ADC1 ->SR & 0X00000010));
 	
-//	return ADC_GetConversionValue(ADC1);
 	return ADC1 ->DR;
 	
 }
@@ -83,29 +55,20 @@ while(1){
 	mapValue=map(ADCValue,4030,0,240,0);
 	
 	if(mapValue>=0 && mapValue<50){
-		//	GPIO_SetBits(GPIOB,GPIO_Pin_0);
 			GPIOB ->BSRR = 0X04070000;
-	//	GPIO_ResetBits(GPIOB,GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_10);	
 		}
 		
 		else if(mapValue >=50 && mapValue<100){
-	//		GPIO_SetBits(GPIOB,GPIO_Pin_0);
 			GPIOB ->BSRR = 0X04060001;
-	//		GPIO_ResetBits(GPIOB,GPIO_Pin_1| GPIO_Pin_2 | GPIO_Pin_10);
 		}
 		
 		else if(mapValue >=100 && mapValue<150){
-	//	GPIO_SetBits(GPIOB,GPIO_Pin_0 | GPIO_Pin_1);
 			GPIOB ->BSRR = 0X04040003;
-	//		GPIO_ResetBits(GPIOB,GPIO_Pin_2 | GPIO_Pin_10);
 		}
 		else if(mapValue >=150 && mapValue<200){
-	//	GPIO_SetBits(GPIOB,GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2);
 			GPIOB ->BSRR = 0X04000007;
-	//		GPIO_ResetBits(GPIOB,GPIO_Pin_10);
 		}
 		else {
-		//	GPIO_SetBits(GPIOB,GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_10);
 			GPIOB ->BSRR = 0X00000407;
 		}
 	}

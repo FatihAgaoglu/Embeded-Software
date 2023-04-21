@@ -66,7 +66,7 @@ void timerConfig(){
 	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);
 	
-  TIMERInitStructure.TIM_ClockDivision=1;
+	TIMERInitStructure.TIM_ClockDivision=1;
 	TIMERInitStructure.TIM_CounterMode=TIM_CounterMode_Up;
 	TIMERInitStructure.TIM_Prescaler=10;
 	TIMERInitStructure.TIM_Period=4099;
@@ -86,7 +86,7 @@ void pwmConfig(uint32_t timPulse){
 	TIMER_OCInitStructure.TIM_OCPolarity=TIM_OCPolarity_High;
 	TIMER_OCInitStructure.TIM_Pulse=timPulse;
 
-  TIM_OC1Init(TIM2,&TIMER_OCInitStructure);
+	TIM_OC1Init(TIM2,&TIMER_OCInitStructure);
 	TIM_OC1PreloadConfig(TIM2,TIM_OCPreload_Enable);
 
 }
@@ -129,7 +129,7 @@ void Encoder_Init_TIM4(){
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
 	
-  TIMERInitStructure.TIM_ClockDivision=TIM_CKD_DIV1;
+	TIMERInitStructure.TIM_ClockDivision=TIM_CKD_DIV1;
 	TIMERInitStructure.TIM_CounterMode=TIM_CounterMode_Up;
 	TIMERInitStructure.TIM_Prescaler=0;
 	TIMERInitStructure.TIM_Period=65535;

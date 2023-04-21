@@ -8,52 +8,43 @@ float mapValue=0;
 
 void gpioConfig(){
 	
-//	GPIO_InitTypeDef GPIOInitStructure;
+	GPIO_InitTypeDef GPIOInitStructure;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
 	
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-		RCC ->APB2ENR = 0X00000004;
+	GPIOInitStructure.GPIO_Mode=GPIO_Mode_AIN;
+	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0;
 	
-//	GPIOInitStructure.GPIO_Mode=GPIO_Mode_AIN;
-//	GPIOInitStructure.GPIO_Pin=GPIO_Pin_0;
-		GPIOA ->CRL = 0X00000000;
-	
-//	GPIO_Init(GPIOA,&GPIOInitStructure);
+	GPIO_Init(GPIOA,&GPIOInitStructure);
 	
 }
 
 void adcConfig(){
 	
-//	ADC_InitTypeDef ADCInitStructure;
+	ADC_InitTypeDef ADCInitStructure;
 	
-//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,ENABLE);
-		RCC ->APB2ENR |= 0X00000200;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1,ENABLE);
 	
-//	ADCInitStructure.ADC_ContinuousConvMode=ENABLE;
-//	ADCInitStructure.ADC_DataAlign=ADC_DataAlign_Right;
-//	ADCInitStructure.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None;
-//	ADCInitStructure.ADC_Mode=ADC_Mode_Independent;
-//	ADCInitStructure.ADC_NbrOfChannel=1;
-//	ADCInitStructure.ADC_ScanConvMode=DISABLE;
-		ADC1 ->CR2 = 0X00000003;	//ADC enable
-		ADC1 ->SMPR2 = 0X00000005;	//55.5 Cycles
+	ADCInitStructure.ADC_ContinuousConvMode=ENABLE;
+	ADCInitStructure.ADC_DataAlign=ADC_DataAlign_Right;
+	ADCInitStructure.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None;
+	ADCInitStructure.ADC_Mode=ADC_Mode_Independent;
+	ADCInitStructure.ADC_NbrOfChannel=1;
+	ADCInitStructure.ADC_ScanConvMode=DISABLE;
 	
-//	ADC_Init(ADC1,&ADCInitStructure);
+	ADC_Init(ADC1,&ADCInitStructure);
 	ADC_Cmd(ADC1,ENABLE);
 	
 }
 
 uint16_t readADC(){
 
-//	ADC_RegularChannelConfig(ADC1,ADC_Channel_0,1,ADC_SampleTime_55Cycles5);
+	ADC_RegularChannelConfig(ADC1,ADC_Channel_0,1,ADC_SampleTime_55Cycles5);
 	
-//	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
-		ADC1 ->CR2 |= 0X00400000;
+	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
 	
-//	while(ADC_GetFlagStatus(ADC1,ADC_FLAG_EOC)==RESET);
-		while(!(ADC1 ->SR & 0X00000010));
+	while(ADC_GetFlagStatus(ADC1,ADC_FLAG_EOC)==RESET);
 	
-//	return ADC_GetConversionValue(ADC1);
-		return ADC1 ->DR;
+	return ADC_GetConversionValue(ADC1);
 	
 }
 

@@ -3,8 +3,8 @@
 #include "stm32f10x_dac.h"              // Keil::Device:StdPeriph Drivers:DAC
 #include "stm32f10x_exti.h"             // Keil::Device:StdPeriph Drivers:EXTI
 #include "stm32f10x_tim.h"              // Keil::Device:StdPeriph Drivers:TIM
-#include <stdlib.h>											// Random sayi üretmek için gerekli kütüphane
-#include "seg7Display.h"								// 7 segment display kütüphanesi
+#include <stdlib.h>						// Random sayi üretmek için gerekli kütüphane
+#include "seg7Display.h"				// 7 segment display kütüphanesi
 
 
 int main(){
